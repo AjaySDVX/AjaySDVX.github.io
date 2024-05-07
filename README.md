@@ -1,2 +1,2 @@
 # AjaySDVX.github.io
-[573](https://ajaysdvx.github.io/index)
+[573](https://ajaysdvx.github.io/573)
