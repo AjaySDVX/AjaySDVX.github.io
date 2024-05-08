@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <title>SOUND</title>
+  <script>
+    // Rotating title bar
+    const titles = [
+        "TEST",
+        "AUDIO",
+        "DEVICES",
+        "SOUND"
+    ];
+
+    // Function to rotate titles
+    function rotateTitles() {
+        let index = 0;
+        setInterval(() => {
+            document.title = titles[index];
+            index = (index + 1) % titles.length;
+        }, 1500); 
+    }
+
+    window.onload = rotateTitles;
+
+    // Function to play audio when hovering over an element
+    function playHoverSound(soundFile, id) {
+        const audio = new Audio(soundFile); // Create audio element with specified sound file
+        audio.volume = 0.1; // Set the volume
+        audio.play();
+        const playingText = document.getElementById("playing" + id);
+        playingText.style.display = "block"; // Show "Playing" text
+        return audio; // Return audio element for stopping later
+    }
+
+    // Function to stop audio when not hovering over an element
+    function stopHoverSound(audio, id) {
+        audio.pause();
+        const playingText = document.getElementById("playing" + id);
+        playingText.style.display = "none"; // Hide "Playing" text
+    }
+  </script>
+  <style type="text/css">
+    a:link { color: white; text-decoration: none; font-weight: normal; }
+    a:visited { color: white; text-decoration: none; font-weight: normal; }
+    a:active { color: white; text-decoration: none; }
+    a:hover { color: white; text-decoration: none; font-weight: none; }
+    .space { margin-top: 300px; }
+    body {
+      overflow: hidden; 
+    }
+    
+    .menuItem {
+      color: white;
+      text-decoration: none;
+      font-weight: normal;
+      user-select: none; /* Prevent text selection */
+      position: relative; /* Ensure relative positioning for child elements */
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; /* Apply font family */
+      font-weight: normal; /* Set font weight to normal */
+    }
+    .menuItem:hover {
+      color: red;
+      font-weight: normal; /* Set font weight to normal */
+    }
+    .playing {
+      position: absolute;
+      font-size: inherit; /* Same size as parent text */
+      color: red;
+      display: none; /* Hidden by default */
+      top: 50%; /* Center vertically */
+      transform: translateY(-50%); /* Center vertically */
+      left: calc(100% + 10px); /* 10 pixels to the right of the text */
+    }
+  </style>
+
+  <body style="background-color: black;color: white;">
+    <style>
+      * {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      }
+    </style>
+    <body>
+      <center><h1>SOUND OPTIONS</h1></center><br>
+
+      <div style = "position: relative; left:320px; font-size: 20px;"><h3>
+        <h3><a>
+          <span id="menu1" class="menuItem" onmouseover="audio1 = playHoverSound('https://cdn.discordapp.com/attachments/822138445592920145/1237823041506119750/tomp3.cc_-_beatmaniaIIDX_12_HAPPY_SKY_Just_Got_Splash_Beats_320kbps.mp3?ex=663d0c0a&is=663bba8a&hm=b9952dcbd68d40e9e11a70b410d773a0e3841c2b617fa2327d440b9b6631b6e1&', 1 )" onmouseout="stopHoverSound(audio1, 1)" onmousemove="showPlaying(event, 'menu1')">AUDIO CHECK 1</span>
+          <span id="playing1" class="playing">▶ PLAYING</span>
+          <br>
+          <span id="menu2" class="menuItem" onmouseover="audio2 = playHoverSound('sound2.mp3', 2)" onmouseout="stopHoverSound(audio2, 2)" onmousemove="showPlaying(event, 'menu2')">AUDIO CHECK 2</span>
+          <span id="playing2" class="playing">▶ PLAYING</span>
+          <br><br>
+          <a href=https://www.foobar2000.org/ class="menuItem">FOOBAR2000</a><br>
+          <a href=https://cdn.discordapp.com/attachments/822138445592920145/1237826014353031168/COLUMN_UI_LAYOUT.fcl?ex=663d0ecf&is=663bbd4f&hm=017340bb022da6eb5db071771a88033dd51fce6e8ea40dca66a86bde284004f6& class="menuItem">COLUMNS UI LAYOUT</a><br>
+          <br>
+          <a href=573.html class="menuItem">EXIT</a><br> <!-- Apply menuItem class to the anchor tag -->
+          <!-- Add more menu items with unique sound files and IDs -->
+        </h3>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="space">
+        <center>USE MOUSE = SELECT ITEM</center>
+        <center>PRESS LMOUSEBUTTON = EXECUTE</center>
+      </div>
+
+      <script>
+        // Function to show "Playing" text when hovering over an element
+        function showPlaying(event, menuId) {
+          // Get the ID of the "Playing" text corresponding to the hovered menu item
+          const playingId = "playing" + menuId.substring(4);
+          // Calculate the position of the "Playing" text relative to the menu item
+          const menuItem = document.getElementById(menuId);
+          const posX = menuItem.offsetLeft + menuItem.offsetWidth + 10; // 10 pixels to the right of the text
+          const posY = menuItem.offsetTop + menuItem.offsetHeight / 2; // Middle of the menu item
+          // Set the position of the "Playing" text
+          const playingText = document.getElementById(playingId);
+          playingText.style.left = posX + "px";
+          playingText.style.top = posY + "px";
+          // Show the "Playing" text
+          playingText.style.display = "block";
+        }
+      </script>
+
+    </body>
+</html>

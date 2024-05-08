@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html>
-    
+    <title>573</title>
+    <script>
+      // Rotating title bar
+      const titles = [
+          "IC",
+          "CARD",
+          "READER",
+          "I CANT CODE FOR SHIT"
+      ];
+  
+      // Function to rotate titles
+      function rotateTitles() {
+          let index = 0;
+          setInterval(() => {
+              document.title = titles[index];
+              index = (index + 1) % titles.length;
+          }, 1500);
+      }
+  
+      window.onload = rotateTitles;
+  </script>
   <style type="text/css">
     a:link { color: white; text-decoration: none; font-weight: normal; }
     a:visited { color: white; text-decoration: none; font-weight: normal; }
@@ -21,47 +41,68 @@
 
     <a href="573.html">
 <div style = "position: relative; left:0px; font-size: 20px;"><h3>IC CARD CHECK<br>
-</h3></div>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFC Scanner</title>
-    <script src="">
-       "use strict";const EventEmitter=require("events"),binding=require("bindings")("nfc-binding"),Promise=require("bluebird");class NFCReader extends EventEmitter{constructor(){super(),this._nfc=new binding.NFCReaderRaw}open(){return this._nfc.open()}close(){return this.close()}transceive(e,r){return r?Promise.fromCallback((n=>this._nfc.transceive(e,r,n))):Promise.fromCallback((r=>this._nfc.transceive(e,r)))}release(){return Promise.fromCallback((e=>this._nfc.release(e)))}poll(){return Promise.fromCallback((e=>this._nfc.poll(e))).then((e=>this.emit("card",e))).catch((e=>{if("NFC_ECHIP"==e.message||"Unknown error"==e.message)return this.poll();this.emit("error",e)}))}}module.exports={NFC:binding.NFC,NFCReader:NFCReader};
+</h3>
+<title>NFC Scanner (FeliCa)</title>
+<script src="https://cdn.jsdelivr.net/npm/libnfc-js@0.1.0/index.min.js"></script>
+<style>
+    #nfc-message {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .success {
+        color: green;
+    }
+    .error {
+        color: red;
+    }
+</style>
 </head>
 <body>
-    <h1>NFC Scan Status</h1>
-    <div id="nfc-message"></div>
+<h1>NFC Scanner (FeliCa)</h1>
+<div id="nfc-message"></div>
 
-    <script>
-        const nfcMessage = document.getElementById('nfc-message');
+<script>
+    const nfcMessage = document.getElementById('nfc-message');
 
-        // Check for NFC support
-        if (nfc.isSupported()) {
-            nfc.onavailabilitychange = checkAvailability;
+    // Check for NFC support
+    if (NFC.isSupported()) {
+        NFC.onavailabilitychange = checkAvailability;
+    } else {
+        NFCMessage.textContent = "This device does not support NFC";
+    }
+
+    function checkAvailability() {
+        if (NFC.available) {
+            NFC.reader.addEventListener("tag", handleTag);
+            NFCMessage.textContent = "Scan an FeliCa card";
         } else {
-            nfcMessage.textContent = "This device does not support NFC";
+            NFCMessage.textContent = "NFC reader unavailable";
         }
+    }
 
-        function checkAvailability() {
-            if (NFC.available) {
-                nfc.reader.addEventListener("tag", handleTag);
-                nfcMessage.textContent = "Scan an FeliCa card";
-            } else {
-                nfcMessage.textContent = "NFC reader unavailable";
-            }
-        }
+    function handleTag(event) {
+        try {
+            const NFCId = event.tag.id.slice(0, 4).map(val => val.toString(16).padStart(2, '0')).join('');
+            NFCMessage.textContent = `OK - FeliCa ID: ${nfcId}`;
+            NFCMessage.classList.add('success'); // Add success class for styling
 
-        function handleTag(event) {
-            const nfcId = event.tag.id.slice(0, 4).map(val => val.toString(16).padStart(2, '0')).join('');
-            nfcMessage.textContent = `OK - FeliCa ID: ${nfcId}`;
+            // Simulate FeliCa interaction (replace with actual FeliCa communication)
+            console.log("FeliCa data exchange simulated (replace with real interaction)");
 
             // Clear the message after 2 seconds
             setTimeout(() => {
-                nfcMessage.textContent = "Scan an FeliCa card";
+                NFCMessage.textContent = "Scan an FeliCa card";
+                NFCMessage.classList.remove('success', 'error'); // Remove both classes
             }, 2000);
+        } catch (error) {
+            console.error("Error:", error);
+            NFCMessage.textContent = "Error: Failed to read FeliCa card";
+            NFCMessage.classList.add('error'); // Add error class for styling
         }
-    </script>
+    }
+</script>
+</body>
 </body>
 </html>
 </body>
