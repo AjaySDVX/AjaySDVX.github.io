@@ -10,16 +10,16 @@
         "573"
     ];
 
-    // Array of alternative names for each hyperlink
+    
     const alternativeNames = [
         "NOTHING", //io 
         "NOTHING", //screen
         "COLOUR GRID", //colour 
         "NOTHING", //rom chec
-        "NOTHING (ISH)", //ic card
+        "NOTHING", //ic card
         "FPS COUNTER", //monior
         "SOUND CHECK WITH MY MUSIC PLAYER", //sound 
-        "NOTHING", //game options
+        "GAMES I PLAY W/STATS", //game options
         "NOTHING", //coin options
         "MIGHT PUT PHOTOGRAPHY HERE", //ecomode options
         "NOTHING ", //network options
@@ -31,9 +31,9 @@
         "MY SPECS" // System info
     ];
 
-    let originalNames = []; // Array to store original names
+    let originalNames = []; 
 
-    // Function to rotate titles
+    
     function rotateTitles() {
         let index = 0;
         setInterval(() => {
@@ -42,17 +42,17 @@
         }, 1500); 
     }
 
-    // Function to update hyperlink text to alternative names
+    
     function updateMenuItems() {
         const menuItems = document.querySelectorAll('.menuItem a');
         if (originalNames.length === 0) {
-            // Store original names if not already stored
+            
             menuItems.forEach(item => {
                 originalNames.push(item.innerText);
             });
         }
         menuItems.forEach((item, index) => {
-            // Toggle between original and alternative names
+            
             if (item.innerText !== alternativeNames[index]) {
                 item.innerText = alternativeNames[index];
             } else {
